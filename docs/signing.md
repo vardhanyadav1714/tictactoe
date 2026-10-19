@@ -39,7 +39,7 @@ To restore signing on another machine, copy the backed-up `tictactoe.jks` to the
 
 Upload the PEM certificate to the reset form. Keep the JKS and password properties private. An upload-key reset requires an existing app enrolled in Play App Signing; this does not replace an independently managed, lost app signing key.
 
-If this is the new game's first Play upload, no lost-key reset is needed. Use `tictactoe.aab` for the first release and follow Play's signing setup. For an update, set a version code higher than every previously uploaded version; the current project starts at version code 1.
+If this is the new game's first Play upload, no lost-key reset is needed. Use `tictactoe.aab` for the first release and follow Play's signing setup. For an update, set a version code higher than every previously uploaded version. This rebuilt app uses version code 2 to update the original app's version code 1.
 
 Reference: [Google Play App Signing and upload-key reset instructions](https://support.google.com/googleplay/android-developer/answer/9842756).
 
