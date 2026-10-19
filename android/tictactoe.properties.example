@@ -1,0 +1,6 @@
+# Copy to tictactoe.properties and enter your private passwords locally.
+# storeFile is resolved relative to the android directory.
+storeFile=../tictactoe.jks
+storePassword=REPLACE_LOCALLY
+keyAlias=tictactoe
+keyPassword=REPLACE_LOCALLY

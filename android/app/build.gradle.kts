@@ -1,8 +1,25 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
+
+val uploadKeyFile = rootProject.file("tictactoe.properties")
+val uploadKeyProperties = Properties()
+if (uploadKeyFile.exists()) {
+    uploadKeyFile.inputStream().use { uploadKeyProperties.load(it) }
+}
+val releaseRequested = gradle.startParameter.taskNames.any {
+    it.contains("release", ignoreCase = true)
+}
+if (releaseRequested && !uploadKeyFile.exists()) {
+    throw GradleException("Release signing requires android/tictactoe.properties and tictactoe.jks. See docs/signing.md.")
+}
+fun uploadKeyValue(name: String): String =
+    uploadKeyProperties.getProperty(name)?.takeIf { it.isNotBlank() }
+        ?: throw GradleException("Missing $name in android/tictactoe.properties")
 
 android {
     namespace = "innovatixhub.in.tictactoe"
@@ -15,7 +32,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "innovatixhub.in.tictactoe"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
@@ -25,11 +41,24 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (uploadKeyFile.exists()) {
+            create("release") {
+                storeFile = rootProject.file(uploadKeyValue("storeFile"))
+                if (!storeFile!!.isFile) {
+                    throw GradleException("The configured upload keystore is missing. Restore tictactoe.jks; see docs/signing.md.")
+                }
+                storeType = "JKS"
+                storePassword = uploadKeyValue("storePassword")
+                keyAlias = uploadKeyValue("keyAlias")
+                keyPassword = uploadKeyValue("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("release")
         }
     }
 }
