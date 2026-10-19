@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0C101B">
+  <meta name="description" content="Your rules. Your rival. Beautifully animated tic tac toe with custom boards, three AI levels, and local multiplayer. By InnovatixHub.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Gridly">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>Gridly · Tic Tac Toe by InnovatixHub</title>
+  <style>
+    html, body { margin: 0; background: #0C101B; color: #F2F4FA; }
+    #loading { position: fixed; inset: 0; display: grid; place-content: center; text-align: center; font: 16px system-ui, sans-serif; }
+    #loading img { width: 96px; height: 96px; margin: auto; border-radius: 24px; }
+    #loading h1 { margin: 18px 0 6px; font-size: 32px; letter-spacing: -1px; }
+    #loading p { color: #97A5BA; font-size: 13px; }
+    .track { width: 160px; height: 3px; margin: 20px auto; border-radius: 4px; background: #293447; overflow: hidden; }
+    .track::after { content: ''; display: block; height: 100%; width: 40%; background: #9EF1CF; animation: slide 1.2s ease-in-out infinite alternate; }
+    @keyframes slide { to { transform: translateX(150%); } }
+    @media (prefers-reduced-motion: reduce) { .track::after { animation: none; width: 100%; } }
+  </style>
+</head>
+<body>
+  <div id="loading" role="status" aria-label="Loading Gridly">
+    <img src="icons/Icon-192.png" alt="">
+    <h1>gridly</h1><p>Small grid. Big possibilities.</p><div class="track"></div>
+  </div>
+  <noscript>Enable JavaScript to play Gridly.</noscript>
+  <script>window.addEventListener('flutter-first-frame', () => document.getElementById('loading')?.remove());</script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
