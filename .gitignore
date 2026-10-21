@@ -44,8 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Private release signing material (all locations).
+# Release signing material; include the encrypted upload key at the owner's request.
 *.jks
+!/tictactoe.jks
 *.keystore
 **/key.properties
 **/tictactoe.properties

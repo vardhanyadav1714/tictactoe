@@ -49,7 +49,7 @@ flutter build web --release --no-web-resources-cdn
 
 The upload-key-signed release APK is written to `build/app/outputs/flutter-apk/app-release.apk`. Run `powershell -NoProfile -ExecutionPolicy Bypass -File tools/build-release.ps1` to build both Android formats with the filenames `build/distributions/tictactoe.aab` and `build/distributions/tictactoe.apk`. Browser output is in `build/web/`. Preview it with `node tools/serve.mjs`, then open `http://127.0.0.1:4173`.
 
-iOS source is included. Building and signing iOS requires macOS and Xcode. Android release builds use the private `tictactoe.jks` upload key through `android/tictactoe.properties`. Both files are excluded from Git. See [signing and Play Console instructions](docs/signing.md) before uploading an existing app update.
+iOS source is included. Building and signing iOS requires macOS and Xcode. Android release builds use the password-protected `tictactoe.jks` upload key through `android/tictactoe.properties`. The encrypted keystore is versioned at the owner's request; the password properties remain excluded from Git. See [signing and Play Console instructions](docs/signing.md) before uploading an existing app update.
 
 ## Game rules
 
